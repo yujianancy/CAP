@@ -48,11 +48,11 @@ test = mul(3,4)
 
 println(test!)
 
-func divi(number1:Int?, number2:Int?) ->Double?{
+func divi(number1:Int?, number2:Int?) ->Int?{
     
     if number1 != nil && number2 != nil {
         
-        return Double(number1!) / Double(number2!)
+        return number1!/number2!
         
     }
     
@@ -60,51 +60,19 @@ func divi(number1:Int?, number2:Int?) ->Double?{
     
 }
 
-var test1 = divi(4,3)
+test = divi(4,3)
 
-println(test1!)
+println(test!)
 
-func calc2ints(number1:Int?, number2:Int?, op:String?) -> Double?{
+func calc2ints(number1:Int?, number2:Int?, op:(Int?, Int?) -> Int?) -> Int?{
     
-    var result:Double = 0.0
-    
-    if number1 != nil && number2 != nil && op != nil {
-        
-        switch op! {
-            
-        case "add", "+":
-            
-            result = Double(number1! + number2!)
-            
-        case "sub", "-":
-            
-            result = Double(number1! - number2!)
-            
-        case "mul", "*":
-            
-            result = Double(number1! * number2!)
-            
-        case "div", "/":
-            
-            result = Double(number1!)/Double(number2!)
-            
-        default:
-            
-            print("I don't understand.")
-            
-        }
-        
-        return result
-        
-    }
-    
-    return nil
+    return op(number1,number2)
     
 }
 
-test1 = calc2ints(3, 4, "sub")
+test = calc2ints(3, 4, sub)
 
-println(test1!)
+println(test!)
 
 func calcArrAdd(numbers:[Int?]) ->Int?{
     
@@ -176,95 +144,40 @@ test = calcArrCount([1,2,3,4,5])
 
 println(test!)
 
-func calcArrAvg(numbers:[Int?]) ->Double? {
+func calcArrAvg(numbers:[Int?]) ->Int? {
     
-    var result = 0.0
-    
-    for index in 0...numbers.count-1{
-        
-        if numbers[index] == nil {
-            
-            return Double(nilHandleErr)
-            
-        } else {
-            
-            result = result + Double(numbers[index]!)
-            
-        }
-        
-    }
-    
-    return result/Double(numbers.count)
-    
-}
-
-test1 = calcArrAvg([1,2,3,4,5])
-
-println(test1!)
-
-func calcArrAll(numbers:[Int?], op:String!) ->Double? {
-    
-    var result:Double = 0.0
+    var result = 0
     
     for index in 0...numbers.count-1{
         
         if numbers[index] == nil {
             
-            return Double(nilHandleErr)
+            return nil
             
         } else {
             
-            switch op {
-                
-            case "add", "+":
-                
-                for index in 0...numbers.count-1{
-                    
-                    result = result + Double(numbers[index]!)
-                    
-                }
-                
-            case "mul", "*":
-                
-                result = 1.0
-                
-                for index in 0...numbers.count-1{
-                    
-                    result = result * Double(numbers[index]!)
-                    
-                }
-                
-            case "count":
-                
-                result = Double(numbers.count)
-                
-            case "avg":
-                
-                for index in 0...numbers.count-1{
-                    
-                    result = result + Double(numbers[index]!)
-                    
-                }
-                
-                return result/Double(numbers.count)
-                
-            default:
-                
-                print("I don't understand.")
-                
-            }
+            result = result + numbers[index]!
             
         }
         
     }
     
-    return result
+    return result/numbers.count
     
 }
 
-test1 = calcArrAll([1,2,3,4,2],"count")
+test = calcArrAvg([1,2,3,4,5])
 
-println(test1!)
+println(test!)
+
+func calcArrAll(numbers:[Int?], op:[Int?] -> Int?) ->Int? {
+    
+    return op(numbers)
+}
+
+test = calcArrAll([1,2,3,4,3],calcArrCount)
+
+println(test!)
 
 func addPoint(point1:(Double,Double), point2:(Double,Double)) -> (Double, Double){
     
