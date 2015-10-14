@@ -14,7 +14,7 @@ func add(number1:Int?, number2:Int?) ->Int?{
 
 var test = add(3,5)
 
-println(test)
+println(test!)
 
 func sub(number1:Int?, number2:Int?) ->Int?{
     
@@ -28,7 +28,7 @@ func sub(number1:Int?, number2:Int?) ->Int?{
     
 }
 
-test = sub(3,4)
+test = sub(3,nil)
 
 println(test)
 
@@ -46,7 +46,7 @@ func mul(number1:Int?, number2:Int?) ->Int?{
 
 test = mul(3,4)
 
-println(test)
+println(test!)
 
 func divi(number1:Int?, number2:Int?) ->Double?{
     
@@ -62,7 +62,7 @@ func divi(number1:Int?, number2:Int?) ->Double?{
 
 var test1 = divi(4,3)
 
-println(test1)
+println(test1!)
 
 func calc2ints(number1:Int?, number2:Int?, op:String?) -> Double?{
     
@@ -104,7 +104,7 @@ func calc2ints(number1:Int?, number2:Int?, op:String?) -> Double?{
 
 test1 = calc2ints(3, 4, "sub")
 
-println(test1)
+println(test1!)
 
 func calcArrAdd(numbers:[Int?]) ->Int?{
     
@@ -128,7 +128,7 @@ func calcArrAdd(numbers:[Int?]) ->Int?{
     
 }
 
-test = calcArrAdd([1,2,3,4,5])
+test = calcArrAdd([nil,2,3,4,5])
 
 println(test)
 
@@ -156,7 +156,7 @@ func calcArrMul(numbers:[Int?]) ->Int? {
 
 test = calcArrMul([1,2,3,4,5])
 
-println(test)
+println(test!)
 
 func calcArrCount(numbers:[Int?]) ->Int? {
     
@@ -174,7 +174,7 @@ func calcArrCount(numbers:[Int?]) ->Int? {
 
 test = calcArrCount([1,2,3,4,5])
 
-println(test)
+println(test!)
 
 func calcArrAvg(numbers:[Int?]) ->Double? {
     
@@ -200,7 +200,7 @@ func calcArrAvg(numbers:[Int?]) ->Double? {
 
 test1 = calcArrAvg([1,2,3,4,5])
 
-println(test1)
+println(test1!)
 
 func calcArrAll(numbers:[Int?], op:String!) ->Double? {
     
@@ -264,7 +264,7 @@ func calcArrAll(numbers:[Int?], op:String!) ->Double? {
 
 test1 = calcArrAll([1,2,3,4,2],"count")
 
-println(test1)
+println(test1!)
 
 func addPoint(point1:(Double,Double), point2:(Double,Double)) -> (Double, Double){
     
@@ -278,6 +278,26 @@ var test2 = addPoint((1,2.2),(2.5,3))
 
 println(test2)
 
+func addPoint(point1:Dictionary<String,Double>, point2:Dictionary<String,Double>) ->Dictionary<String,Double>{
+    
+    var dic = Dictionary<String,Double>()
+    
+    if point1["x"] == nil || point2["x"] == nil || point1["y"] == nil || point2["y"] == nil{
+        
+        println("Please enter values of x and y")
+        
+    } else{
+        
+        dic = ["x": point1["x"]!+point2["x"]!, "y":point1["y"]!+point2["y"]!]
+        
+    }
+    return dic
+}
+
+var test3 = addPoint(["y":2.2],["x":1.0,"y":3.6])
+
+println(test3)
+
 func subPoint(point1:(Double,Double), point2:(Double,Double)) -> (Double, Double){
     
     let result = ((point1.0 - point2.0), (point1.1 - point2.1))
@@ -289,3 +309,23 @@ func subPoint(point1:(Double,Double), point2:(Double,Double)) -> (Double, Double
 test2 = subPoint((1,2.2),(2.5,3))
 
 println(test2)
+
+func subPoint(point1:Dictionary<String,Double>, point2:Dictionary<String,Double>) ->Dictionary<String,Double>{
+    
+    var dic = Dictionary<String,Double>()
+    
+    if point1["x"] == nil || point2["x"] == nil || point1["y"] == nil || point2["y"] == nil{
+        
+        println("Please enter values of x and y")
+        
+    } else{
+        
+        dic = ["x": point1["x"]!-point2["x"]!, "y":point1["y"]!-point2["y"]!]
+        
+    }
+    return dic
+}
+
+test3 = addPoint(["x":3.5,"y":2.2],["x":1.0,"y":3.6])
+
+println(test3)
